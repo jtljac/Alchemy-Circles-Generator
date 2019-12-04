@@ -62,7 +62,7 @@
     // Shape (between 4 and 8 points, random rotation)
     $lati = mt_rand(4, 8);
     imagepolygon($img1, drawPoly($lati, $colore, 0, $radius, $size), $lati, $colore);
-    $case = mt_rand(0,1)
+    $case = mt_rand(0,1);
     if($case == 1){
         $smallArcSize = ($size / 2) / 44 * 90 / $lati;
         $angdiff = deg2rad(360 / $lati);
@@ -84,22 +84,21 @@
             imagearc($img2, $size / 2 + $posax, $size / 2 + $posay, $smallArcSize, $smallArcSize, $angle1, $angle2, $colore);
 
         }
-        elseif($case == 2){
-            $posax = (($radius) * cos($i * $angdiff));
-            $posay = (($radius) * sin($i * $angdiff));
-            
-            $points = circleIntersect($size/2, $size/2, $radius * 2, $posax, $posay, $smallArcSize);
+    } elseif($case == 2){
+        $posax = (($radius) * cos($i * $angdiff));
+        $posay = (($radius) * sin($i * $angdiff));
+        
+        $points = circleIntersect($size/2, $size/2, $radius * 2, $posax, $posay, $smallArcSize);
 
-            $dy = ($posay - $points[0][0]);
-            $dx = ($posax - $points[0][1]);
-            $angle1 =  (atan($dy/$dx) + (rad2deg($angdiff) * $i) + 93 + $lati) % 360;
+        $dy = ($posay - $points[0][0]);
+        $dx = ($posax - $points[0][1]);
+        $angle1 =  (atan($dy/$dx) + (rad2deg($angdiff) * $i) + 93 + $lati) % 360;
 
-            $dy = ($posay - $points[1][0]);
-            $dx = ($posax - $points[1][1]);
-            $angle2 = ((atan($dy/$dx) + (rad2deg($angdiff) * $i)) - (91 + $lati)) % 360;
-            
-            imagearc($img2, $size / 2 + $posax, $size / 2 + $posay, $smallArcSize, $smallArcSize, $angle1, $angle2, $colore);
-        }
+        $dy = ($posay - $points[1][0]);
+        $dx = ($posax - $points[1][1]);
+        $angle2 = ((atan($dy/$dx) + (rad2deg($angdiff) * $i)) - (91 + $lati)) % 360;
+        
+        imagearc($img2, $size / 2 + $posax, $size / 2 + $posay, $smallArcSize, $smallArcSize, $angle1, $angle2, $colore);
     }
     
     // Cross, same number of points 
